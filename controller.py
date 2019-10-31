@@ -11,10 +11,8 @@ keywords = ['University', 'Canada',
 news = NewsLoader(keywords)
 mongo_db.save_array(news.load_news(), collection='news')
 
-twitter_stream = TwitterStream(keywords=keywords,
-                               mongo=mongo_db,
-                               collection='tweets')
-twitter_stream.start()
+# twitter_stream = TwitterStream(keywords=keywords, mongo=mongo_db, collection='tweets')
+# twitter_stream.start()
 
-twitter_search = TwitterSearch()
-mongo_db.save_array(twitter_search.search(keywords), collection='tweets')
+# twitter_search = TwitterSearch()
+# mongo_db.save_array(twitter_search.search(keywords), collection='tweets')

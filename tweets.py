@@ -6,6 +6,7 @@ from tweepy import Stream
 from tweepy import StreamListener
 from credentials import TwitterAuth
 from mongo import Mongo
+from mongo import Collection
 
 auth = TwitterAuth().create()
 
@@ -56,7 +57,7 @@ class TwitterStream:
                 # returning False in on_error disconnects the stream
                 return False
 
-    def __init__(self, keywords, mongo, collection):
+    def __init__(self, keywords, mongo, collection: Collection):
         self.keywords = keywords
 
         new_stream = TwitterStream.EducationStreamListner(mongo, collection)

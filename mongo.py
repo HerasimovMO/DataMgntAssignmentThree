@@ -19,10 +19,10 @@ class Mongo:
         self.db = self.client[self.db_name]
 
     def save_array(self, json_content, collection):
-        self.db[collection].insert_many(json_content)
+        self.db[collection.value].insert_many(json_content)
 
     def save_object(self, json_content, collection):
-        self.db[collection].insert_one(json_content)
+        self.db[collection.value].insert_one(json_content)
 
     def get_values(self, collection: Collection):
         return self.db[collection.value].find({}, {collection.content_field(): 1, '_id': 0})

@@ -11,10 +11,12 @@ keywords = ['University', 'Canada',
 
 news = NewsLoader(keywords)
 mongo_db.save_array(news.load_news(), Collection.News)
+print('SUCCESS: Collected news articles')
 
+print('Started streaming tweets')
 twitter_stream = TwitterStream(keywords=keywords,
                                mongo=mongo_db,
-                               collection='tweets')
+                               collection=Collection.Tweets)
 twitter_stream.start()
 
 # twitter_search = TwitterSearch()

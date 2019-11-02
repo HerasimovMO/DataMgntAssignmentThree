@@ -50,8 +50,8 @@ special_words = ['good school', 'good schools', 'bad school',
                  'poor school', 'poor schools', 'computer science']
 
 content = re.sub(' +', ' ', (tweets + " " + news).replace('\n', ' '))
-#for word in special_words:
- #   content = re.sub(word, word.replace(' ', ''), content, flags=re.IGNORECASE)
+for word in special_words:
+    content = re.sub(word, word.replace(' ', ''), content, flags=re.IGNORECASE)
 
 generate_file(content, 'content')
 print('Generated text file with content of tweets and news')

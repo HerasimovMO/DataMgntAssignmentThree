@@ -46,6 +46,12 @@ news = " ".join(list(map(lambda x: clean(x, Collection.News),
                          mongo_db.get_values(Collection.News))))
 print('Gethered and cleaned all the news')
 
+special_words = ['good school', 'good schools', 'bad school',
+                 'poor school', 'poor schools', 'computer science']
+
 content = re.sub(' +', ' ', (tweets + " " + news).replace('\n', ' '))
+for word in special_words:
+    content = re.sub(word, word.replace(' ', ''), content, flags=re.IGNORECASE)
+
 generate_file(content, 'content')
 print('Generated text file with content of tweets and news')

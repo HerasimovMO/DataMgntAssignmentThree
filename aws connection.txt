@@ -28,3 +28,6 @@ tar -xzvf spark-2.4.4-bin-hadoop2.7.tgz
 
 # drop collection in mongodb
 db.collection.drop()
+
+# count documents in the collection
+db.collection.countDocuments({})

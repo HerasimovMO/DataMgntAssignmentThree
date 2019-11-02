@@ -9,7 +9,14 @@ text_file = sc.textFile("datasets/content.txt")
 # words = sc.parallelize(text_file.flatMap(lambda line: line.split(" ")), 2)
 words = text_file.flatMap(lambda line: line.split(" "))
 
+# set up words that we will be looking for
+keywords = ['education', 'canada', 'university', 'dalhousie', 'expensive', 'faculty', 'graduate',
+            'goodschool', 'goodschools', 'badschool', 'badschools', 'poorschool', 'poorschools', 'computerscience']
+
+# count all the words
 counts = words.map(lambda word: (word, 1)).reduceByKey(lambda a, b: a + b)
+# filter those that required by the assignment
+counts = counts.filter(lambda x: x[0] in keywords)
 
 counts.saveAsTextFile("reduce_result")
 

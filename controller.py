@@ -1,5 +1,6 @@
 from news import NewsLoader
 from mongo import Mongo
+from mongo import Collection
 from tweets import TwitterStream
 from tweets import TwitterSearch
 
@@ -9,12 +10,12 @@ keywords = ['University', 'Canada',
             'Dalhousie University', 'Halifax', 'Canada Education']
 
 news = NewsLoader(keywords)
-mongo_db.save_array(news.load_news(), collection='news')
+mongo_db.save_array(news.load_news(), Collection.News)
 
 twitter_stream = TwitterStream(keywords=keywords,
                                mongo=mongo_db,
                                collection='tweets')
 twitter_stream.start()
 
-twitter_search = TwitterSearch()
-mongo_db.save_array(twitter_search.search(keywords), collection='tweets')
+# twitter_search = TwitterSearch()
+# mongo_db.save_array(twitter_search.search(keywords), Collection.Tweets)

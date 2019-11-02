@@ -1,6 +1,15 @@
 # https://realpython.com/introduction-to-mongodb-and-python/#pymongo
 
 from pymongo import MongoClient
+import enum
+
+
+class Collection(enum.Enum):
+    Tweets = "tweets"
+    News = "news"
+
+    def content_field(self):
+        return 'text' if self == Collection.Tweets else 'description'
 
 
 class Mongo:
@@ -14,3 +23,6 @@ class Mongo:
 
     def save_object(self, json_content, collection):
         self.db[collection].insert_one(json_content)
+
+    def get_values(self, collection: Collection):
+        return self.db[collection.value].find({}, {collection.content_field(): 1, '_id': 0})

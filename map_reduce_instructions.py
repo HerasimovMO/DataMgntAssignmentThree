@@ -22,3 +22,6 @@ counts.saveAsTextFile("reduce_result")
 
 # copy final results
 # cp -i ~/spark/spark-2.4.4-bin-hadoop2.7/datasets/reduce_result/* ~/DataMngAssignmentTwo/results
+
+# clean previous results
+# rm -r ~/DataMngAssignmentTwo/results/*

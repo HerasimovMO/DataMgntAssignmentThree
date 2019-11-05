@@ -1,4 +1,5 @@
-# https://tweepy.readthedocs.io/en/latest/streaming_how_to.html
+# “Streaming With Tweepy” Streaming With Tweepy - tweepy 3.8.0 documentation. [Online].
+# Available: https://tweepy.readthedocs.io/en/latest/streaming_how_to.html. [Accessed: 05-Nov-2019].
 
 import tweepy
 
@@ -22,6 +23,8 @@ class Tweet(object):
         self.author_sreen_name = status.author.screen_name
         self.author_name = status.author.name
 
+# used for searching tweets
+
 
 class TwitterSearch:
     def search(self, keywords):
@@ -34,6 +37,8 @@ class TwitterSearch:
         # take a look at Cursor
         print(f'Number of tweets is {len(public_tweets)}')
         return tweets
+
+# used for streaming tweets
 
 
 class TwitterStream:

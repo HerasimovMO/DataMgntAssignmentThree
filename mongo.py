@@ -1,4 +1,7 @@
-# https://realpython.com/introduction-to-mongodb-and-python/#pymongo
+# REFERENCE
+#
+# Real Python, “Introduction to MongoDB and Python,” Real Python, 08-Jul-2019. [Online].
+# Available: https://realpython.com/introduction-to-mongodb-and-python/#pymongo. [Accessed: 05-Nov-2019].
 
 from pymongo import MongoClient
 import enum

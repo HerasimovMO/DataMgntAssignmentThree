@@ -6,7 +6,8 @@ from mongo import Collection
 
 
 def clean(item, collection: Collection):
-    # https://docs.python.org/3/howto/regex.html
+    # “Regular Expression,” Regular Expression - Python 3.8.0 documentation. [Online].
+    # Available: https://docs.python.org/3/howto/regex.html. [Accessed: 05-Nov-2019].
 
     if item[collection.content_field()] == None:
         print('FOUND NONE')
@@ -20,7 +21,8 @@ def clean(item, collection: Collection):
     main_re = r'http\S+|\[\+[0-9]{0,10} chars\]|[0-9]|(@[A-Za-z0-9]+)'
     text = re.sub(main_re, '', text, flags=re.IGNORECASE)
 
-    # https://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string
+    # L. J. L. Johnston, “Best way to strip punctuation from a string,” Stack Overflow, 01-Jan-1959. [Online].
+    # Available: https://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string. [Accessed: 05-Nov-2019].
     # remove punctuation
     text = text.translate(str.maketrans('', '', string.punctuation))
 
@@ -36,19 +38,22 @@ def generate_file(text, file_name):
     file.close()
 
 
+# create mongo instance
 mongo_db = Mongo(db_name='assignment_two')
 
+# load tweets from database and clean the content
 tweets = " ".join(list(map(lambda x: clean(x, Collection.Tweets),
                            mongo_db.get_values(Collection.Tweets))))
 print('Gethered and cleaned all the tweets')
 
+# load tweets from database and clean the content
 news = " ".join(list(map(lambda x: clean(x, Collection.News),
                          mongo_db.get_values(Collection.News))))
 print('Gethered and cleaned all the news')
 
 special_words = ['good school', 'good schools', 'bad school',
                  'poor school', 'poor schools', 'computer science']
-
+# join phrases into one word
 content = re.sub(' +', ' ', (tweets + " " + news).replace('\n', ' '))
 for word in special_words:
     content = re.sub(word, word.replace(' ', ''), content, flags=re.IGNORECASE)

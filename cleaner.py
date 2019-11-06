@@ -13,6 +13,8 @@ def clean(item, collection: Collection):
         print('FOUND NONE')
         return ''
 
+    # A. Adam, "Removing emojis from a string in Python", Stack Overflow, 2019. [Online].
+    # Available: https://stackoverflow.com/questions/33404752/removing-emojis-from-a-string-in-python. [Accessed: 06- Nov- 2019].
     # remove all non-ascii characters
     text = item[collection.content_field()].encode(
         'ascii', 'ignore').decode('ascii')

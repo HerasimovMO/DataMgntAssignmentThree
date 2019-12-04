@@ -12,7 +12,7 @@ class Article:
         self.content = dict['content']
 
     def __repr__(self):
-        return f'title = {self.title}; description = {self.description}; content = {self.content}'
+        return f'Title = {self.title}; Description = {self.description}; Content = {self.content}'
 
 
 class Cleaner:

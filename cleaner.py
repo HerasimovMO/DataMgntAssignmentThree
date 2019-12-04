@@ -14,7 +14,7 @@ class Cleaner:
         self.items = mongo_db.get_values(collection)
 
     def get_bag_of_words(self):
-        return list(map(lambda x: self.clean_and_count(x), self.items))
+        return list(map(lambda x: self.create_bag(self.clean_and_count(x)), self.items))
 
     def create_bag(self, text):
         words = text.split(" ")
@@ -53,4 +53,4 @@ class Cleaner:
         # remove double spaces
         text = re.sub(' +', ' ', text)
 
-        return self.create_bag(text.lower().strip())
+        return text.lower().strip()

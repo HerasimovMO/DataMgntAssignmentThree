@@ -12,7 +12,7 @@ class Collection(enum.Enum):
     News = "news"
 
     def content_field(self):
-        return 'text' if self == Collection.Tweets else 'description'
+        return ['text'] if self == Collection.Tweets else ['title', 'description', 'content']
 
 
 class Mongo:
@@ -21,11 +21,10 @@ class Mongo:
         self.client = MongoClient()
         self.db = self.client[self.db_name]
 
-    def save_array(self, json_content, collection):
-        self.db[collection.value].insert_many(json_content)
-
-    def save_object(self, json_content, collection):
-        self.db[collection.value].insert_one(json_content)
-
     def get_values(self, collection: Collection):
-        return self.db[collection.value].find({}, {collection.content_field(): 1, '_id': 0})
+        fields = collection.content_field()
+        retrieve_fields = {'_id': 0}
+        for field in fields:
+            retrieve_fields[field] = 1
+
+        return self.db[collection.value].find({}, retrieve_fields)

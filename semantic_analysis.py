@@ -73,7 +73,7 @@ def create_highest_occurrences_canada_table(counted_articles, file_name):
     return relative_frequencies
 
 
-# keywords that we are looking for in tweets and news
+# keywords that we are looking for in news
 keywords = ['University', 'Canada',
             'Dalhousie University', 'Halifax', 'Canada Education']
 
@@ -83,20 +83,23 @@ articles = cleaner.get_articles()
 counted_values = list(
     map(lambda x: ArticleInfo(x, keywords).create_dict(), articles))
 print(
-    f'Finished counting values. There are {len(counted_values)} news articles. Example {counted_values[:3]} ... \n')
+    f'Finished counting word occurrences. There are {len(counted_values)} news articles. Example {counted_values[:3]} ... \n')
 
+# ------------------------ Part A ------------------------
 first_file_name = 'number_of_documents_containing_keyword'
 create_total_word_occurrences_table(
     keywords, counted_values, first_file_name)
 print(
     f'Generated table that shows number of news articles where keywords appeared. Document is named {first_file_name}\n')
 
+# ------------------------ Part B ------------------------
 second_file_name = 'canada_occurrences_table'
 relative_frequencies = create_highest_occurrences_canada_table(
     counted_values, second_file_name)
 print(
     f'Generated table that shows news articles where word Canada appeared most. Document is named {second_file_name}\n')
 
+# ------------------------ Part C ------------------------
 (frequency, article_number) = max(
     zip(relative_frequencies.values(), relative_frequencies.keys()))
 print(f'List of highest frequencies: {relative_frequencies}\n')

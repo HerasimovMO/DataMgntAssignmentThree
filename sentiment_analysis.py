@@ -4,7 +4,7 @@ from mongo import Collection
 from words_loader import WordsLoader
 
 import enum
-import csv
+import utility
 
 
 class Polarity(enum.Enum):
@@ -55,15 +55,6 @@ def identify_polarity(bag):
     return PolarityInfo(tweet_polarity, match, bag)
 
 
-def generate_file(data, file_name):
-
-    with open(file_name + '.csv', 'w') as file:
-        writer = csv.writer(file)
-        writer.writerows(data)
-
-    file.close()
-
-
 data = [['polarity', 'polarity_value', 'most_used_word',
          'most_used_word_count', 'match_length_(words)', 'coverage_(%)', 'match']]
 
@@ -72,5 +63,5 @@ for bag in bags[:600]:
     data.append(polarity_info.convert_to_array())
 print('Finished polarization')
 
-generate_file(data, 'polarized_tweets')
+utility.generate_file(data, 'polarized_tweets')
 print('File generated')

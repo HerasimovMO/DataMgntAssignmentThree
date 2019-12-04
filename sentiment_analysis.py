@@ -26,9 +26,12 @@ class PolarityInfo:
         self.match = " ".join(match)
         self.coverage = len(match) / len(bag)
         self.match_count = len(match)
+        (count, most_used_word) = max(zip(bag.values(), bag.keys()))
+        self.most_used_word = most_used_word
+        self.most_used_word_count = count
 
     def convert_to_array(self):
-        return [self.polarity.value, self.polarity_value, self.match, self.match_count, self.coverage * 100]
+        return [self.polarity.value, self.polarity_value, self.most_used_word, self.most_used_word_count, self.match_count, self.coverage * 100, self.match]
 
     def __repr__(self):
         return f'polarity = {self.polarity.value}; polarity value = {self.polarity_value}; match = {self.match}; match length = {self.match_count} words; coverage = {self.coverage * 100}%'
@@ -61,8 +64,8 @@ def generate_file(data, file_name):
     file.close()
 
 
-data = [['polarity', 'polarity value', 'match',
-         'match length (words)', 'coverage (%)']]
+data = [['polarity', 'polarity_value', 'most_used_word',
+         'most_used_word_count', 'match_length_(words)', 'coverage_(%)', 'match']]
 
 for bag in bags[:600]:
     polarity_info = identify_polarity(bag)
